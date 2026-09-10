@@ -420,7 +420,7 @@ enum Message {
     ConfigUpdated(AppListConfig),
     OpenFavorites,
     OpenActive,
-    Surface(surface::Action),
+    Surface(surface::Action<Message>),
 }
 
 fn index_in_list(
@@ -1745,9 +1745,7 @@ impl cosmic::Application for CosmicAppList {
                 }
             }
             Message::Surface(a) => {
-                return cosmic::task::message(cosmic::Action::Cosmic(
-                    cosmic::app::Action::Surface(a),
-                ));
+                return cosmic::task::message(cosmic::Action::Surface(a));
             }
         }
 
